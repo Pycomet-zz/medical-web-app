@@ -1,0 +1,16 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+  <div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.regularprofile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p>{{ user.email }}</p>
+        <p>Please visit the home page to view accessible information.</p>
+      </div>
+    </div>
+    <a class='btn btn-outline-info' href="{% url 'update' %}">Edit Profile</a>
+    <a class='btn btn-outline-info' href="{% url 'info' %}">Edit Medical Information</a>
+  </div>
+{% endblock content %}

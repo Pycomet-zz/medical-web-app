@@ -1,0 +1,200 @@
+{% extends 'users/layout.html' %}
+
+<script>
+{% block jQuery %}
+    var endpoint = '/api/data/'
+    var items = []
+    var labels = []
+
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+            labels = data.labels
+            defaultData = data.items
+            setChart()
+        },
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    })
+
+    function setChart(){
+        var ctx = document.getElementById("myChart");
+        var ctx2 = document.getElementById("myChart2");
+
+        var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'MyChart',
+                data: defaultData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                hoverBorderWidth: 1,
+                hoverBorderColor: '#000'
+            }]
+        },
+        options:{
+            title:{
+                display: true,
+                text: 'Medical Bar Chart',
+                fontsize: 20
+            },
+            legend:{
+                display: false
+            },
+        }
+    });
+        var myChart2 = new Chart(ctx2, {
+        type: 'polarArea',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'MyChart',
+                data: defaultData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                hoverBorderColor: '#000' 
+            }]
+        },
+        options:{
+            title:{
+                display: true,
+                text: 'Medical PolarArea Chart',
+                fontsize: 20
+            },
+            legend:{
+                display: false
+            }
+        }
+    });
+}
+
+{% endblock %}
+</script>
+
+{% block content %}
+    <div class='container'>       
+        <div class='article-content'>
+            <small>Hi there {{ user.username }},</small>
+            <h1>This is the Home Page of this test website built by Alfred Emmanuel Inyang</h1>
+            {% if user.is_practitioner %}
+                <div class="card">
+                    <a class="btn btn-outline-info" href="{% url 'table' %}">CLICK TO SEE ALL USER DATA</a>
+                </div>
+            {% else %}
+                <p>The charts below is a representation of all our patients and their respective data stored on this site.</p>
+            {% endif %}
+            <div class='row' url-endpoint='{% url "api-data" %}'>
+                <p><canvas id="myChart" width="400" height="400"></canvas><canvas id="myChart2" width="400" height="400"></canvas></p>
+            </div>
+        </div>
+    </div>  
+{% endblock %}
+
+{% block sidebar %}
+<div class="col-md-4">
+    <div class="content-section">
+        <h3>View Users</h3>
+        <p>By Records</p>
+
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Malaria
+                <ul class="list-item dropdown-menu">
+                    {% for each in malaria %}
+                    <li class="dropdown-item">{{ each }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </div>
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Typhoid
+                <ul class="list-item dropdown-menu">
+                    {% for t in typhoid %}
+                    <li class="dropdown-item">{{ t }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </div>
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Cholera
+                <ul class="list-item dropdown-menu">
+                    {% for c in cholera %}
+                    <li class="dropdown-item">{{ c }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </div>
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Fever
+                <ul class="list-item dropdown-menu">
+                    {% for f in fever %}
+                    <li class="dropdown-item">{{ f }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </div>
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Small Pox
+                <ul class="list-item dropdown-menu">
+                    {% for s in small_pox %}
+                    <li class="dropdown-item">{{ s }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </div>
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Apollo
+                <ul class="list-item dropdown-menu">
+                    {% for a in apollo %}
+                    <li class="dropdown-item">{{ a }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        <div>
+            <li class="list-group-item list-group-item-light dropdown-toggle" data-toggle="dropdown">Measles
+                <ul class="list-item dropdown-menu">
+                    {% for l in measles %}
+                    <li class="dropdown-item">{{ l }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </div>
+ 
+        </p>
+    </div>
+</div>
+{% endblock %}

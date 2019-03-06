@@ -1,0 +1,12 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+    <div class='container'>
+        <h1>You have successfully logged out!</h1>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'login' %}">Log In Again</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

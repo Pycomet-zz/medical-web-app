@@ -1,0 +1,11 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+    <div class='col-md-12'>
+        <h3>CREATE AN ACCOUNT</h3>
+        <div class='col-mr-8'>
+            <a class="btn btn-outline-info" href="{% url 'register-regular' %}">As Free User</a>
+            <a class="btn btn-outline-info" href="{% url 'register-practitioner' %}">As Medical Practitioner</a>
+        </div>
+    </div>
+{% endblock %}

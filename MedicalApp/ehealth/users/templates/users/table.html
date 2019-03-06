@@ -1,0 +1,35 @@
+{% extends "users/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class='container'>
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Malaria</th>
+                    <th>Typhoid</th>
+                    <th>Cholera</th>
+                    <th>Fever</th>
+                    <th>Small_pox</th>
+                    <th>Apollo</th>
+                    <th>Measles</th>
+                </tr>
+            </thead>
+            {% for p in profile %}
+            <tbody>
+                <tr>
+                    <td>{{ p }}</td>
+                    <td>{{ p.regularprofile.malaria }}</td>
+                    <td>{{ p.regularprofile.typhoid }}</td>
+                    <td>{{ p.regularprofile.cholera }}</td>
+                    <td>{{ p.regularprofile.fever }}</td>
+                    <td>{{ p.regularprofile.small_pox }}</td>
+                    <td>{{ p.regularprofile.apollo }}</td>
+                    <td>{{ p.regularprofile.measles }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

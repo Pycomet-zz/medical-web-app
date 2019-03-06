@@ -1,0 +1,20 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+    <div class='col-md-12'>
+        <h2>WELCOME {{ user.username }}</h2>
+        <p>Good Day,</p>
+        <p>This is a Web Application built by Alfred Emmanuel Inyang as a test to prove my eligibility for the Python Developer role at Ehealth4everyone.</p>
+        <p>I have built the test web application with all the requested functionalities. Please go ahead to creating an account and also read the about page to know all the site features.</p>
+        <p>You have to be logged in to have access to the main website information. Please register now or log in as an existing user.</p>
+        <p>Thank you.</p>
+        <div class='row'>
+            {% if user.is_authenticated %}
+                <a class="btn btn-outline-info" href="{% url 'logout' %}">LOG OUT</a>
+            {% else %}
+                <a class="btn btn-outline-info card" href="{% url 'login' %}">LOG IN</a>
+                <a class="btn btn-outline-info card" href="{% url 'signup' %}">REGISTER</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
