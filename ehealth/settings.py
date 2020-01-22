@@ -25,7 +25,9 @@ SECRET_KEY = 'r$d6zjpj@_b#1c-pm@r2g!pfup*!zns3je7zv_op5wnn*f@a%r' # This is wher
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ehealth4everyone.herokuapp.com'
+]
 
 
 # Application definition
@@ -78,8 +80,12 @@ WSGI_APPLICATION = 'ehealth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'NAME': 'd4o9rjm011dqah',
+        'HOST': 'ec2-54-174-229-152.compute-1.amazonaws.com'
+        'PORT': '5432',
+        'USER': 'qpxsihlvzqytec',
+        'PASSWORD': '4bca00631b50edc7a6a2989845da5ef846928e2184649600c18b72872116abd9'
+    }   
 }
 
 
